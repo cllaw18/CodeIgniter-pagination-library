@@ -10,4 +10,5 @@
 <p>Total Number: <?php echo $results['total_num']; ?></p>
 
 <hr />
-<p>Provided by <a href="http://www.soyosolution.com" target="_blank">Soyo Solution</a>, This content is released under the (Link Goes Here) MIT License.</p>
+<p>Provided by <a href="http://www.soyosolution.com" target="_blank">Soyo Solution</a>, 
+This content is released under the <a href="http://opensource.org/licenses/MIT" target="_blank"> MIT License</a>.</p>
