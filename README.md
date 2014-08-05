@@ -93,11 +93,11 @@ You can change appearance of pagination bar by chnaging these value:
         $config['next_link']  = '<img src="https://lh3.googleusercontent.com/-A16makYUz7I/U-A5GfZImqI/AAAAAAAABYE/E5hr3us1pT4/w13-h11-no/pink_next10.gif" alt="To next page" />';
         $config['last_link']  = '<img src="https://lh4.googleusercontent.com/-l_c1t1lApKk/U-A5Gf2n06I/AAAAAAAABX4/3p4-qY0cTAs/w13-h11-no/pink_end.gif" alt="To last page" />';        
         
-$config['num_links'] is the number of the page number displayed at the pagination bar
-$config['first_link'] is the icon of first link.
-$config['prev_link'] is the icon for go to previous page.
-$config['next_link'] is the icon for go to next page.
-$config['last_link'] is the icon of first link.
+$config['num_links'] is the number of the page number displayed at the pagination bar<br />
+$config['first_link'] is the icon of first link.<br />
+$config['prev_link'] is the icon for go to previous page.<br />
+$config['next_link'] is the icon for go to next page.<br />
+$config['last_link'] is the icon of first link.<br />
 
 Reference:
 ---------
