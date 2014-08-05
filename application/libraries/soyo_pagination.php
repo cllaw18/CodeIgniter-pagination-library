@@ -47,12 +47,12 @@ class soyo_pagination extends CI_Controller {
         $config['use_page_numbers'] = TRUE;
         $config['total_rows'] = $this->record_count($paging['sql']);//get amount of returning record from mySQL.
         $config['per_page'] = $paging['per_page']; //display how many record per page.
-        $config['num_links'] = 10;
         $config['uri_segment'] = $segment_amount+1;//cos the url was changed to 1/2 ,1/3, 1/4
-        $config['first_link'] = '<i class="fa fa-angle-double-right"></i>';
-        $config['last_link']  = '<i class="fa fa-angle-double-left"></i>';
-        $config['prev_link']  = '<i class="fa fa-angle-left"></i>';
-        $config['next_link']  = '<i class="fa fa-angle-right"></i>';
+        $config['num_links'] = 4;        
+        $config['first_link'] = '<img src="https://lh5.googleusercontent.com/-ZhbEtlrTREE/U-A5GxaK10I/AAAAAAAABX8/Iq9MV9aYgvs/w13-h11-no/pink_start.gif" alt="To first page" />';
+        $config['prev_link']  = '<img src="https://lh3.googleusercontent.com/-gC50RSiYb3o/U-A5GLTbzAI/AAAAAAAABX0/W09zQ-8H024/w13-h11-no/pink_back10.gif" alt="To previous page" />';
+        $config['next_link']  = '<img src="https://lh3.googleusercontent.com/-A16makYUz7I/U-A5GfZImqI/AAAAAAAABYE/E5hr3us1pT4/w13-h11-no/pink_next10.gif" alt="To next page" />';
+        $config['last_link']  = '<img src="https://lh4.googleusercontent.com/-l_c1t1lApKk/U-A5Gf2n06I/AAAAAAAABX4/3p4-qY0cTAs/w13-h11-no/pink_end.gif" alt="To last page" />';        
         
         $start = ($ci->uri->segment($segment_amount+1)) ? $ci->uri->segment($segment_amount+1) : 0; //Get the begining display record number from the url. 
         //Data pass to model md_pagination.
