@@ -82,6 +82,22 @@ How to use the sample
 - 2 Copy .htaccess and all file to your codeigniter.
 - 3 Run your page : http://yourdomain/yourciroot/sample/index/1/1/<br />(For e.g. : <a href="#">http://localhost/ci/sample/index/1/1</a>)
     
+How to config pagination bar icons:
+----------------------------------
+The config of pagination bar 's appearance was hard coded in "/application/libraries/soyo_pagination.php", arround line 51 - line 55, 
+You can change appearance of pagination bar by chnaging these value:
+        
+        $config['num_links'] = 4;        
+        $config['first_link'] = '<img src="https://lh5.googleusercontent.com/-ZhbEtlrTREE/U-A5GxaK10I/AAAAAAAABX8/Iq9MV9aYgvs/w13-h11-no/pink_start.gif" alt="To first page" />';
+        $config['prev_link']  = '<img src="https://lh3.googleusercontent.com/-gC50RSiYb3o/U-A5GLTbzAI/AAAAAAAABX0/W09zQ-8H024/w13-h11-no/pink_back10.gif" alt="To previous page" />';
+        $config['next_link']  = '<img src="https://lh3.googleusercontent.com/-A16makYUz7I/U-A5GfZImqI/AAAAAAAABYE/E5hr3us1pT4/w13-h11-no/pink_next10.gif" alt="To next page" />';
+        $config['last_link']  = '<img src="https://lh4.googleusercontent.com/-l_c1t1lApKk/U-A5Gf2n06I/AAAAAAAABX4/3p4-qY0cTAs/w13-h11-no/pink_end.gif" alt="To last page" />';        
+        
+$config['num_links'] is the number of the page number displayed at the pagination bar
+$config['first_link'] is the icon of first link.
+$config['prev_link'] is the icon for go to previous page.
+$config['next_link'] is the icon for go to next page.
+$config['last_link'] is the icon of first link.
 
 Reference:
 ---------
