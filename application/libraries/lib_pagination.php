@@ -27,33 +27,34 @@ class lib_pagination{
     function create_pagination($pg_config) {
         //Uncomment to config to your own pagination style.
         /*
-        $config['first_link'] = 'First';      //The text you would like shown in the "first" link on the left. If you do not want this link rendered, you can set its value to FALSE.
-        $config['first_tag_open'] = '<span>';  //The opening tag for the "first" link.
+        $config['first_link']      = 'First';      //The text you would like shown in the "first" link on the left. If you do not want this link rendered, you can set its value to FALSE.
+        $config['first_tag_open']  = '<span>';  //The opening tag for the "first" link.
         $config['first_tag_close'] = '</span>';//The closing tag for the "first" link.
 
-        $config['last_link'] = 'Last';        //The text you would like shown in the "last" link on the right. If you do not want this link rendered, you can set its value to FALSE.
-        $config['last_tag_open'] = '<span>';   //The opening tag for the "last" link.
-        $config['last_tag_close'] = '</span>'; //The closing tag for the "last" link.
+        $config['last_link']       = 'Last';        //The text you would like shown in the "last" link on the right. If you do not want this link rendered, you can set its value to FALSE.
+        $config['last_tag_open']   = '<span>';   //The opening tag for the "last" link.
+        $config['last_tag_close']  = '</span>'; //The closing tag for the "last" link.
         
-        $config['next_link'] = '&gt;';        //The text you would like shown in the "next" page link. If you do not want this link rendered, you can set its value to FALSE.
-        $config['next_tag_open'] = '<span>';   //The opening tag for the "next" link.
-        $config['next_tag_close'] = '</span>'; //The closing tag for the "next" link.
+        $config['next_link']       = '&gt;';        //The text you would like shown in the "next" page link. If you do not want this link rendered, you can set its value to FALSE.
+        $config['next_tag_open']   = '<span>';   //The opening tag for the "next" link.
+        $config['next_tag_close']  = '</span>'; //The closing tag for the "next" link.
         
-        $config['prev_link'] = '&lt;';        //The text you would like shown in the "previous" page link. If you do not want this link rendered, you can set its value to FALSE.
-        $config['prev_tag_open'] = '<span>';   //The opening tag for the "previous" link.
-        $config['prev_tag_close'] = '</span>'; //The closing tag for the "previous" link.
+        $config['prev_link']       = '&lt;';        //The text you would like shown in the "previous" page link. If you do not want this link rendered, you can set its value to FALSE.
+        $config['prev_tag_open']   = '<span>';   //The opening tag for the "previous" link.
+        $config['prev_tag_close']  = '</span>'; //The closing tag for the "previous" link.
         
-        $config['cur_tag_open'] = '<b>';      //$config['cur_tag_open'] = '<b>';
-        $config['cur_tag_close'] = '</b>';    //$config['cur_tag_close'] = '</b>';
+        $config['cur_tag_open']    = '<b>';      //$config['cur_tag_open'] = '<b>';
+        $config['cur_tag_close']   = '</b>';    //$config['cur_tag_close'] = '</b>';
         
-        $config['num_tag_open'] = '<span>';    //The opening tag for the "digit" link.
-        $config['num_tag_close'] = '</span>';  //The closing tag for the "digit" link.
+        $config['num_tag_open']    = '<span>';    //The opening tag for the "digit" link.
+        $config['num_tag_close']   = '</span>';  //The closing tag for the "digit" link.
         */
     
         //Check is that the first page
         $last_segment = $this->get_current_url_last_segment(1);
         $config["base_url"] = (empty($last_segment)?$this->get_current_url_without_pagenum()."/".$this->get_current_url_last_segment(2):$config["base_url"] = $this->get_current_url_without_pagenum());
         
+        //Value pass to CI pagination library class
         $config["total_rows"]       = $this->record_count($pg_config['sql']);
         $config["per_page"]         = $pg_config['per_page']; //items per page
         $config["uri_segment"]      = $this->CI->uri->total_segments();
@@ -61,13 +62,15 @@ class lib_pagination{
         $this->CI->pagination->initialize($config);
         $page_no = ($this->CI->uri->segment($config["uri_segment"]))? $this->CI->uri->segment($config["uri_segment"]) : 0;
         
-        //value pass to function get_db_content()
-        $todb['sql']     = $pg_config['sql']; //sql get from controller.
-        $todb['limit']   = $pg_config['per_page'];
-        $todb['page_no'] = $page_no;            
+        //Value pass to function get_db_content()
+        $todb['sql']           = $pg_config['sql']; //sql get from controller.
+        $todb['limit']         = $pg_config['per_page'];
+        $todb['page_no']       = $page_no;            
         
-        $data["results"] = $this->get_db_content($todb);
-        $data["links"] = $this->CI->pagination->create_links();
+        //Value for views
+        $data["results"]       = $this->get_db_content($todb);
+        $data["pagination"]    = $this->CI->pagination->create_links();
+        $data["result_amount"] = $config["total_rows"];
         return $data;
     }
 
