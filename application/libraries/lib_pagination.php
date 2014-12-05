@@ -50,9 +50,16 @@ class lib_pagination{
         $config['num_tag_close']   = '</span>';  //The closing tag for the "digit" link.
         */
     
-        //Check is that the first page
+        //Check is that the first page, and not end with controller name
         $last_segment = $this->get_current_url_last_segment(1);
-        $config["base_url"] = (empty($last_segment)?$this->get_current_url_without_pagenum()."/".$this->get_current_url_last_segment(2):$config["base_url"] = $this->get_current_url_without_pagenum());
+        if(empty($last_segment)){ //url end with '/',
+            $config["base_url"] = $this->get_current_url_without_pagenum()."/".$this->get_current_url_last_segment(2);
+        }else if(is_numeric($last_segment)){ //end with number , 2
+            $config["base_url"] = $this->get_current_url_without_pagenum();
+        }else{ //may end with controller name
+            $config["base_url"] = $this->get_current_url();
+        }
+        //$config["base_url"] = (empty($last_segment)?$this->get_current_url_without_pagenum()."/".$this->get_current_url_last_segment(2):$this->get_current_url_without_pagenum());
         
         //Value pass to CI pagination library class
         $config["total_rows"]       = $this->record_count($pg_config['sql']);
@@ -99,9 +106,11 @@ Get current url by php default function
 return  $pageURL            current_url;
 =================================================================== */
    function get_current_url(){
+        //$pageURL = base_url().$_SERVER["REQUEST_URI"];
         $pageURL = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
         if ($_SERVER["SERVER_PORT"] != "80") {
             $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+            //$pageURL .= base_url().$_SERVER["REQUEST_URI"];
         } else {
             $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
         }
