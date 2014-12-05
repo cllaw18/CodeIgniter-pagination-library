@@ -1,7 +1,6 @@
 CodeIgniter-pagination-library
 ==============================
 
-
 It's a pagination library for CodeIgniter 2. Most of the code was moved from controller to the library, easy to config and create the pagination.
 
 
@@ -9,104 +8,127 @@ An overview of the files
 ------------------------
 - application
   - controllers
-    - sample.php
+    - pagination.php
   - libraries
-    - soyo_pagination.php
+    - lib_pagination.php
   - views
     - paging_sample.php
 - Sql
-  - news.sql
+  - paging.sql
 - .htaccess
 
-How to use the library
-----------------------
+How to use the library / samples
+--------------------------------
+<ol>
+<li>Copy the paging.sql in sql folder, and import to your database. (It's for create a table named wp_posts)</li>
+<li>Copy .htaccess and all file to your codeigniter. (optional)</li>
+<li>Copy pagination.php sample code to yout controllers folder.</li>
+<li>Copy lib_pagination.php sample code to yout libraries folder.</li>
+<li>Copy paging_sample.php sample code to yout views folder.</li>
+<li>Run your page : http://yourdomain/yourciroot/pagination/index<br />(For e.g. : <a href="#">http://localhost/ci/sample/pagination/index</a>)</li>
+</ol>
+
 <h3>Controller Part</h3>
-Copy codes from example controller ("/application/controllers/sample.php"), what you have to config is colored text showen below.
+Copy codes from example controller ("/application/controllers/pagination.php"), what you have to config is colored text showen below.
     
     public function index(){
-        $this->load->library('soyo_pagination'); 
-        $paging_config['sql']         = "SELECT * FROM news ";
-        $paging_config['per_page']    = 4;
-        $paging_config['segment_no']  = 3;
-        $data['results']       = $this->soyo_pagination->create_pagination($paging_config);
-        $this->load->view("paging_sample",$data);
+        $this->load->library('lib_pagination');                         
+        $pg_config['sql']      = "SELECT * from wp_posts";              
+        $pg_config['per_page'] = 5;                                     
+        $data = $this->lib_pagination->create_pagination($pg_config);   
+        $this->load->view("paging_sample", $data);                      
     }
 
-<b>$paging_config['sql']</b>
-Value of $paging_config['sql'] is your sql statement but rememeber the statements must without ; since the library would add something after you sql.
+<b>$pg_config['sql']</b>
+Value of $pg_config['sql'] is your sql statement but rememeber the statements must without ; since the library would add something after you sql.
 
-<b>$paging_config['per_page']</b>
-This value is for showing how many record per page, must be an integer. If the value is 4, means display 4 items per page.
-
-<b>$paging_config['segment_no']</b>
-This is the position of url segment you will add. The pagination would add some segement like 1/2, 2/3 after your url. 
-For e.g. if the page is <a href="#">http://www.soyosolution.com/en/works
-en is url segment 1 and works would be the  url segment 2</p>
-
-We want add the pagination segement at the position of segment 3. So we use "3" to be value of $paging_config['segment_no']
-
+<b>$pg_config['per_page']</b>
+This value is for showing how many record per page, must be an integer. If the value is 5, means display 5 items per page.
 
 ------------------    
 <h3>Views part</h3>
 
     <?php
         if (!empty($results['results'])){
-            foreach($results['results'] as $row) { 
-                echo ".$row->id." ) ".$row->title."</div>";
+            foreach($results['results'] as $data) { 
+                echo ".$data->id." ) ".$data->post_date."</div>";
         
             }
         }
     ?>
-    <p>Pagination: <?php echo $this->pagination->create_links(); ?></p>       
-    <p>Total Number: <?php echo $results['total_num']; ?></p>    
+    <p>Pagination: <?php echo $links; ?></p>
 
     
-To display pagination bar at your view, use this code <?php echo $this->pagination->create_links(); ?> and place to somewhere you wanted to display.</p>
-And &lt;?php echo $results['total_num']; ?&lt; is for display total records of your records.</p>
-Code in green is the php statment to display your records from database.</p>
+To display pagination bar at your view, use this code <?php echo $links; ?> and place to somewhere you wanted to display.</p>
+
 
 -----------------------    
 <h3>.htaccess part</h3>
-Create a .htacess to remove the index.php? of your url. You can just copy all code in .htaccess placing in the root of this project.
+This part is optional, for removing the index.php? of your url. You can just copy all code in .htaccess placing in the root of this project. For example:
+
+From : http://soyosolution.com/index.php?/pagination/index/5
+To   : http://soyosolution.com/pagination/index/5
 
 ----------------------    
-<h3>Run your page</h3>    
-If you want call your page, you need add 1/ or 1/1 after your page url. For example:
-    <a href="http://soyosolution.com/en/works/1/" target="_blank">http://soyosolution.com/en/works/1/</a>
-    <a href="#">http://localhost/ci/sample/index/1/1</a>
+<h3>Run your page</h3>  
+Suupose you run the code in localhost and install CodeIgniter in a folder named "ci":
+http://localhost/ci/sample/pagination/index
+Or you can run demo on our website:
+http://soyosolution.com/index.php?/pagination/index<br />
+http://soyosolution.com/pagination/index
 
-
-How to use the sample
----------------------
-- 1 Copy the news.sql in sql folder, and import to your database. (It's for create a table named news)
-- 2 Copy .htaccess and all file to your codeigniter.
-- 3 Run your page : http://yourdomain/yourciroot/sample/index/1/1/<br />(For e.g. : <a href="#">http://localhost/ci/sample/index/1/1</a>)
     
 How to config pagination bar icons:
 ----------------------------------
-The config of pagination bar 's appearance was hard coded in "/application/libraries/soyo_pagination.php", arround line 51 - line 55, 
-You can change appearance of pagination bar by chnaging these value:
+The config of pagination bar 's appearance was paged in "/application/libraries/lib_pagination.php", arround line 28 - line 51, 
+You can change appearance of pagination bar by uncomment and chnaging these value:
         
-        $config['num_links'] = 4;        
-        $config['first_link'] = '<img src="https://lh5.googleusercontent.com/-ZhbEtlrTREE/U-A5GxaK10I/AAAAAAAABX8/Iq9MV9aYgvs/w13-h11-no/pink_start.gif" alt="To first page" />';
-        $config['prev_link']  = '<img src="https://lh3.googleusercontent.com/-gC50RSiYb3o/U-A5GLTbzAI/AAAAAAAABX0/W09zQ-8H024/w13-h11-no/pink_back10.gif" alt="To previous page" />';
-        $config['next_link']  = '<img src="https://lh3.googleusercontent.com/-A16makYUz7I/U-A5GfZImqI/AAAAAAAABYE/E5hr3us1pT4/w13-h11-no/pink_next10.gif" alt="To next page" />';
-        $config['last_link']  = '<img src="https://lh4.googleusercontent.com/-l_c1t1lApKk/U-A5Gf2n06I/AAAAAAAABX4/3p4-qY0cTAs/w13-h11-no/pink_end.gif" alt="To last page" />';        
+        //Uncomment to config to your own pagination style.
+        /*
+        $config['first_link'] = 'First';       //The text you would like shown in the "first" link on the left. If you do not want this link rendered, you can set its value to FALSE.
+        $config['first_tag_open'] = '<span>';  //The opening tag for the "first" link.
+        $config['first_tag_close'] = '</span>';//The closing tag for the "first" link.
+
+        $config['last_link'] = 'Last';         //The text you would like shown in the "last" link on the right. If you do not want this link rendered, you can set its value to FALSE.
+        $config['last_tag_open'] = '<span>';   //The opening tag for the "last" link.
+        $config['last_tag_close'] = '</span>'; //The closing tag for the "last" link.
         
-$config['num_links'] is the number of the page number displayed at the pagination bar<br />
-$config['first_link'] is the icon of first link.<br />
-$config['prev_link'] is the icon for go to previous page.<br />
-$config['next_link'] is the icon for go to next page.<br />
-$config['last_link'] is the icon of first link.<br />
+        $config['next_link'] = '&gt;';         //The text you would like shown in the "next" page link. If you do not want this link rendered, you can set its value to FALSE.
+        $config['next_tag_open'] = '<span>';   //The opening tag for the "next" link.
+        $config['next_tag_close'] = '</span>'; //The closing tag for the "next" link.
+        
+        $config['prev_link'] = '&lt;';         //The text you would like shown in the "previous" page link. If you do not want this link rendered, you can set its value to FALSE.
+        $config['prev_tag_open'] = '<span>';   //The opening tag for the "previous" link.
+        $config['prev_tag_close'] = '</span>'; //The closing tag for the "previous" link.
+        
+        $config['cur_tag_open'] = '<b>';       //$config['cur_tag_open'] = '<b>';
+        $config['cur_tag_close'] = '</b>';     //$config['cur_tag_close'] = '</b>';
+        
+        $config['num_tag_open'] = '<span>';    //The opening tag for the "digit" link.
+        $config['num_tag_close'] = '</span>';  //The closing tag for the "digit" link.
+        */       
+        
+Update
+------
+05/12/2014      Release CodeIgniter-pagination-library v2  
+- Rewrite the library and sample referenced by a codeigniter basic tutorial at codesamplez.com
+- auto count the segment number for configuration
+- auto change pagination link if it's the first page
+- inclucde the all pagination code into a value named $links
+                
+30/06/2014      Release CodeIgniter-pagination-library v1
+
 
 Reference:
 ---------
+Codeigniter Offical Site<br />
+http://ellislab.com/codeigniter/user-guide/libraries/pagination.html<br />
+http://codesamplez.com/development/codeigniter-basic-tutorial
 
-Codeigniter Offical Site
-http://ellislab.com/codeigniter/user-guide/libraries/pagination.html
+Pagination Sample Site:<br />
+http://soyosolution.com/en/works/1/<br />
+http://soyosolution.com/pagination/index
 
-Pagination Sample Site:
-http://soyosolution.com/en/works/1/
-
-Library Site:
+Library Site:<br />
 http://tool.soyosolution.com/codeIgniter-pagination-library/
+
