@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Codeigniter-pagination-library by soyosolution</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Codeigniter-pagination-library</h1>
+        <p>Included the codes into the library file, easy to config and create the pagination.</p>
+
+        <p class="view"><a href="https://github.com/soyosolution/CodeIgniter-pagination-library">View the Project on GitHub <small>soyosolution/CodeIgniter-pagination-library</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/soyosolution/CodeIgniter-pagination-library/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/soyosolution/CodeIgniter-pagination-library/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/soyosolution/CodeIgniter-pagination-library">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="codeigniter-pagination-library" class="anchor" href="#codeigniter-pagination-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>CodeIgniter-pagination-library</h1>
+
+<p>It's a pagination library for CodeIgniter 2. Most of the code was moved from controller to the library, easy to config and create the pagination.</p>
+
+<h2>
+<a id="an-overview-of-the-files" class="anchor" href="#an-overview-of-the-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>An overview of the files</h2>
+
+<ul>
+<li>application
+
+<ul>
+<li>controllers
+
+<ul>
+<li>pagination.php</li>
+</ul>
+</li>
+<li>libraries
+
+<ul>
+<li>lib_pagination.php</li>
+</ul>
+</li>
+<li>views
+
+<ul>
+<li>paging_sample.php</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Sql
+
+<ul>
+<li>paging.sql</li>
+</ul>
+</li>
+<li>.htaccess</li>
+</ul>
+
+<h2>
+<a id="how-to-use-the-library--samples" class="anchor" href="#how-to-use-the-library--samples" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use the library / samples</h2>
+
+<ol>
+<li>Copy the paging.sql in sql folder, and import to your database. (It's for create a table named wp_posts)</li>
+<li>Copy .htaccess and all file to your codeigniter. (optional)</li>
+<li>Copy pagination.php sample code to yout controllers folder.</li>
+<li>Copy lib_pagination.php sample code to yout libraries folder.</li>
+<li>Copy paging_sample.php sample code to yout views folder.</li>
+<li>Run your page : http://yourdomain/yourciroot/pagination/index<br>(For e.g. : <a href="#">http://localhost/ci/sample/pagination/index</a>)</li>
+</ol>
+
+<h3>
+<a id="controller-part" class="anchor" href="#controller-part" aria-hidden="true"><span class="octicon octicon-link"></span></a>Controller Part</h3>
+
+<p>Copy codes from example controller ("/application/controllers/pagination.php"), what you have to config is colored text showen below.</p>
+
+<pre><code>public function index(){
+    $this-&gt;load-&gt;library('lib_pagination');                         
+    $pg_config['sql']      = "SELECT * from wp_posts";              
+    $pg_config['per_page'] = 5;                                     
+    $data = $this-&gt;lib_pagination-&gt;create_pagination($pg_config);   
+    $this-&gt;load-&gt;view("paging_sample", $data);                      
+}
+</code></pre>
+
+<p><b>$pg_config['sql']</b>
+Value of $pg_config['sql'] is your sql statement but rememeber the statements must without ; since the library would add something after you sql.</p>
+
+<p><b>$pg_config['per_page']</b>
+This value is for showing how many record per page, must be an integer. If the value is 5, means display 5 items per page.</p>
+
+<hr>
+
+<h3>
+<a id="views-part" class="anchor" href="#views-part" aria-hidden="true"><span class="octicon octicon-link"></span></a>Views part</h3>
+
+<pre><code>&lt;?php
+    if (!empty($results['results'])){
+        foreach($results['results'] as $data) { 
+            echo ".$data-&gt;id." ) ".$data-&gt;post_date."&lt;/div&gt;";
+
+        }
+    }
+?&gt;
+&lt;p&gt;Pagination: &lt;?php echo $links; ?&gt;&lt;/p&gt;
+</code></pre>
+
+<p>To display pagination bar at your view, use this code &lt;?php echo $links; ?&gt; and place to somewhere you wanted to display.</p>
+
+<hr>
+
+<h3>
+<a id="htaccess-part" class="anchor" href="#htaccess-part" aria-hidden="true"><span class="octicon octicon-link"></span></a>.htaccess part</h3>
+
+<p>This part is optional, for removing the index.php? of your url. You can just copy all code in .htaccess placing in the root of this project. For example:</p>
+
+<p>From : <a href="http://soyosolution.com/index.php?/pagination/index/5">http://soyosolution.com/index.php?/pagination/index/5</a>
+To   : <a href="http://soyosolution.com/pagination/index/5">http://soyosolution.com/pagination/index/5</a></p>
+
+<hr>
+
+<h3>
+<a id="run-your-page" class="anchor" href="#run-your-page" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run your page</h3>  
+
+<p>Suupose you run the code in localhost and install CodeIgniter in a folder named "ci":
+http://localhost/ci/sample/pagination/index
+Or you can run demo on our website:
+<a href="http://soyosolution.com/index.php?/pagination/index">http://soyosolution.com/index.php?/pagination/index</a><br>
+<a href="http://soyosolution.com/pagination/index">http://soyosolution.com/pagination/index</a></p>
+
+<h2>
+<a id="how-to-config-pagination-bar-icons" class="anchor" href="#how-to-config-pagination-bar-icons" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to config pagination bar icons:</h2>
+
+<p>The config of pagination bar 's appearance was paged in "/application/libraries/lib_pagination.php", arround line 28 - line 51, 
+You can change appearance of pagination bar by uncomment and chnaging these value:</p>
+
+<pre><code>    //Uncomment to config to your own pagination style.
+    /*
+    $config['first_link'] = 'First';       //The text you would like shown in the "first" link on the left. If you do not want this link rendered, you can set its value to FALSE.
+    $config['first_tag_open'] = '&lt;span&gt;';  //The opening tag for the "first" link.
+    $config['first_tag_close'] = '&lt;/span&gt;';//The closing tag for the "first" link.
+
+    $config['last_link'] = 'Last';         //The text you would like shown in the "last" link on the right. If you do not want this link rendered, you can set its value to FALSE.
+    $config['last_tag_open'] = '&lt;span&gt;';   //The opening tag for the "last" link.
+    $config['last_tag_close'] = '&lt;/span&gt;'; //The closing tag for the "last" link.
+
+    $config['next_link'] = '&amp;gt;';         //The text you would like shown in the "next" page link. If you do not want this link rendered, you can set its value to FALSE.
+    $config['next_tag_open'] = '&lt;span&gt;';   //The opening tag for the "next" link.
+    $config['next_tag_close'] = '&lt;/span&gt;'; //The closing tag for the "next" link.
+
+    $config['prev_link'] = '&amp;lt;';         //The text you would like shown in the "previous" page link. If you do not want this link rendered, you can set its value to FALSE.
+    $config['prev_tag_open'] = '&lt;span&gt;';   //The opening tag for the "previous" link.
+    $config['prev_tag_close'] = '&lt;/span&gt;'; //The closing tag for the "previous" link.
+
+    $config['cur_tag_open'] = '&lt;b&gt;';       //$config['cur_tag_open'] = '&lt;b&gt;';
+    $config['cur_tag_close'] = '&lt;/b&gt;';     //$config['cur_tag_close'] = '&lt;/b&gt;';
+
+    $config['num_tag_open'] = '&lt;span&gt;';    //The opening tag for the "digit" link.
+    $config['num_tag_close'] = '&lt;/span&gt;';  //The closing tag for the "digit" link.
+    */       
+</code></pre>
+
+<h2>
+<a id="update" class="anchor" href="#update" aria-hidden="true"><span class="octicon octicon-link"></span></a>Update</h2>
+
+<p>05/12/2014      Release CodeIgniter-pagination-library v2  </p>
+
+<ul>
+<li>Rewrite the library and sample referenced by a codeigniter basic tutorial at codesamplez.com</li>
+<li>auto count the segment number for configuration</li>
+<li>auto change pagination link if it's the first page</li>
+<li>inclucde the all pagination code into a value named $links</li>
+</ul>
+
+<p>30/06/2014      Release CodeIgniter-pagination-library v1</p>
+
+<h2>
+<a id="reference" class="anchor" href="#reference" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reference:</h2>
+
+<p>Codeigniter Offical Site<br>
+<a href="http://ellislab.com/codeigniter/user-guide/libraries/pagination.html">http://ellislab.com/codeigniter/user-guide/libraries/pagination.html</a><br>
+<a href="http://codesamplez.com/development/codeigniter-basic-tutorial">http://codesamplez.com/development/codeigniter-basic-tutorial</a></p>
+
+<p>Pagination Sample Site:<br>
+<a href="http://soyosolution.com/en/works/1/">http://soyosolution.com/en/works/1/</a><br>
+<a href="http://soyosolution.com/pagination/index">http://soyosolution.com/pagination/index</a></p>
+
+<p>Library Site:<br>
+<a href="http://tool.soyosolution.com/codeIgniter-pagination-library/">http://tool.soyosolution.com/codeIgniter-pagination-library/</a></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/soyosolution">soyosolution</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
