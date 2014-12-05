@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
-<title>CodeIgniter Pagination Library - Soyo Solution</title>
+<title><?php echo $title; ?></title>
 </head>
 <body>
 <div id="container">
-	<h1 style="text-align:center">Page Navigation in PHP</h1>
+	<h1 style="text-align:center">CodeIgniter Pagination Library Demo</h1>
 	<table width="400" border="1" align="center">
 		<tr>
 			<td width="100" bgcolor="#CCCCCC"><p>ID</p></td>
@@ -28,7 +28,8 @@
 		}
 		?>
 	</table>
-	<div style="text-align:center"><?php echo $links; ?></div>
+	<div style="text-align:center"><?php echo $pagination; ?></div>
+    <div style="text-align:right">Total records: <?php echo $result_amount; ?></div>
 </div>
 </div>
 <hr />
