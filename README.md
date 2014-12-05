@@ -155,7 +155,10 @@ Values for View
         
 Update
 ------
-05/12/2014      Release CodeIgniter-pagination-library v2  
+04/12/2014      
+- Fix bugs if url end is not with '/', or number.
+
+04/12/2014      Release CodeIgniter-pagination-library v2  
 - Rewrite the library and sample referenced by a codeigniter basic tutorial at codesamplez.com
 - auto count the segment number for configuration
 - auto change pagination link if it's the first page
