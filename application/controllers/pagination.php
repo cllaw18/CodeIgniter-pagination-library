@@ -23,8 +23,10 @@ class pagination extends CI_Controller {
         $pg_config['sql']      = "SELECT * from wp_posts";              //your SQL, don't add ";" in your SQL query
         $pg_config['per_page'] = 5;                                     //Display items per page
         $data = $this->lib_pagination->create_pagination($pg_config);   //Load function in "lib_pagination" libraryfor create pagination. 
+        $data['title']         = "CodeIgniter pagination library - Soyo Solution";
         $this->load->view("paging_sample", $data);                      //Pass result to view
     }
     
 }
 ?>
+
