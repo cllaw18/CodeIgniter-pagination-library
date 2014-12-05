@@ -108,6 +108,51 @@ You can change appearance of pagination bar by uncomment and chnaging these valu
         $config['num_tag_close'] = '</span>';  //The closing tag for the "digit" link.
         */       
         
+Values for View
+--------------
+<table>
+    <tr>
+        <td>$results</td>
+        <td>An object storing the result.</td>
+    </tr>
+    <tr>
+        <td>$pagination</td>
+        <td>This value storing all the pagination code, place it to somewhere you want show the pagination bar.</td>
+    </tr>
+    <tr>
+        <td>$result_amount</td>
+        <td>It's a integer storing the result records of your sql.</td>
+    </tr>
+</table>
+<pre><code>&lt;?php
+	&lt;h1 style="text-align:center"&gt;CodeIgniter Pagination Library Demo&lt;/h1&gt;
+	&lt;table width="400" border="1" align="center"&gt;
+		&lt;tr&gt;
+			&lt;td width="100" bgcolor="#CCCCCC"&gt;&lt;p&gt;ID&lt;/p&gt;&lt;/td&gt;
+			&lt;td width="300" bgcolor="#CCCCCC"&gt;Post Date&lt;/td&gt;
+            &lt;td width="300" bgcolor="#CCCCCC"&gt;Post Title&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;h1 style="text-align:center"&gt;&lt;/h1&gt;
+&lt;div id="body"&gt;
+ 
+		<i class="s">&lt;?php
+		foreach($results as $data) {
+		?&gt;</i>
+		&lt;tr&gt;
+            &lt;td&gt;&lt;?php echo $data-&gt;id; ?&gt;&lt;/td&gt;
+			&lt;td&gt;&lt;?php echo $data-&gt;post_date; ?&gt;&lt;/td&gt;
+			&lt;td&gt;&lt;?php echo $data-&gt;post_title; ?&gt;&lt;/td&gt;
+		&lt;/tr&gt;
+		<i class="s">&lt;?php
+		}
+		?&gt;</i>
+	&lt;/table&gt;
+	&lt;div style="text-align:center"&gt;<i class="s">&lt;?php echo $pagination; ?&gt;</i>&lt;/div&gt;
+    &lt;div style="text-align:right"&gt;Total records: <i class="s">&lt;?php echo $result_amount; ?&gt;</i>&&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+        
 Update
 ------
 05/12/2014      Release CodeIgniter-pagination-library v2  
