@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 30, 2014 at 08:56 AM
+-- Generation Time: Dec 05, 2014 at 01:36 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -17,42 +17,58 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `ci`
+-- Database: `paging`
 --
+CREATE DATABASE IF NOT EXISTS `paging` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `paging`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `news`
+-- Table structure for table `wp_posts`
 --
 
-CREATE TABLE IF NOT EXISTS `news` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
+CREATE TABLE IF NOT EXISTS `wp_posts` (
+  `id` int(11) DEFAULT NULL,
+  `post_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `post_title` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `news`
+-- Dumping data for table `wp_posts`
 --
 
-INSERT INTO `news` (`id`, `title`, `date`) VALUES
-(1, 'Barclays sees profits fall by 7%', '2014-06-17 16:00:00'),
-(2, 'More than five-a-day ''no effect'' ', '2014-06-17 16:00:00'),
-(3, 'Obama: Cost to Russia will grow', '2014-07-29 16:00:00'),
-(4, 'Putin can make difference', '0000-00-00 00:00:00'),
-(5, 'Khmer Rouge duo begin genocide trial', '0000-00-00 00:00:00'),
-(6, 'Last Hiroshima bomb crewman dies', '0000-00-00 00:00:00'),
-(7, 'Amazon pledges $2bn India investment ', '2014-07-10 08:35:16'),
-(8, 'Ten convicted for India school fire ', '2014-07-16 23:38:13'),
-(9, 'China media: Zhou Yongkang ', '2014-07-18 01:17:50'),
-(10, 'Community steak ', '2014-07-18 01:17:50'),
-(11, 'How faces drive first impressions ', '2014-07-18 01:17:50'),
-(12, 'MPs bicker over climate report', '2014-07-18 01:17:50'),
-(13, 'Twitter shares surge on user growth ', '2014-07-18 01:17:50'),
-(14, 'Japan output falls most since 2011 ', '2014-07-18 01:17:50'),
-(15, 'Sleep sensor smashes Kickstarter goal ', '2014-07-18 01:17:50');
+INSERT INTO `wp_posts` (`id`, `post_date`, `post_title`) VALUES
+(1, '2014-03-31 04:41:16', 'Title 1'),
+(2, '2014-03-31 04:41:16', 'Title 2'),
+(3, '2014-03-31 04:41:16', 'This is Title 3'),
+(4, '2014-03-31 04:41:16', 'This is Title 4'),
+(5, '2014-03-31 04:41:16', 'Title 5 !'),
+(6, '2014-03-31 04:41:16', 'Title 6~'),
+(7, '2014-03-31 04:41:16', 'And this is Title 7~'),
+(8, '2014-03-31 04:41:16', 'This is Title 8'),
+(9, '2014-03-31 04:41:16', ' Title 9'),
+(10, '2014-03-31 04:41:16', ' Title 10'),
+(11, '2014-03-31 04:41:16', 'Title 11'),
+(12, '2014-03-31 04:41:16', 'Title 12'),
+(13, '2014-03-31 04:41:16', 'This is Title 13'),
+(14, '2014-03-31 04:41:16', 'This is Title 14'),
+(15, '2014-03-31 04:41:16', 'Title 15 !'),
+(16, '2014-03-31 04:41:16', 'Title 16~'),
+(17, '2014-03-31 04:41:16', 'And this is Title 17~'),
+(18, '2014-03-31 04:41:16', 'This is Title 18'),
+(19, '2014-03-31 04:41:16', ' Title 19'),
+(20, '2014-03-31 04:41:16', ' Title 20'),
+(21, '2014-03-31 04:41:16', 'Title 21'),
+(22, '2014-03-31 04:41:16', 'Title 22'),
+(23, '2014-03-31 04:41:16', 'This is Title 23'),
+(24, '2014-03-31 04:41:16', 'This is Title 24'),
+(25, '2014-03-31 04:41:16', 'Title 25 !'),
+(26, '2014-03-31 04:41:16', 'Title 26~'),
+(27, '2014-03-31 04:41:16', 'And this is Title 27~'),
+(28, '2014-03-31 04:41:16', 'This is Title 28'),
+(29, '2014-03-31 04:41:16', ' Title 29'),
+(30, '2014-03-31 04:41:16', ' Title 30');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
